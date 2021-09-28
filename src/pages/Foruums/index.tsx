@@ -69,7 +69,7 @@ const ForuumsPage = () => {
           {data && data?.length === 0
             ? <p>Looks like you aren't part of any forums</p>
             : (<div>
-              <h4>Forums part of:</h4>
+              <h4>Forums you are a part of:</h4>
               <table style={{ border: '1px solid #efefef', width: '100%' }}>
                 <tbody>
                   {data && data.map((i: any, key: number) => <tr key={`foruum-${key}`}>

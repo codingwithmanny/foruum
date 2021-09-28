@@ -1,4 +1,4 @@
-# Forumm
+# Foruum
 
 ## Why Build This?
 
@@ -45,7 +45,7 @@ cd ..;
 4. Start Frontend
 
 ```bash
-yarn start;
+yarn dev;
 ```
 
 ## Tests

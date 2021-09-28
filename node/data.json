@@ -1,8 +1,38 @@
 {
   "accounts": [
-    { "id": "0xb7AE5De3e843a26Ca764605f6Bec916701f88556", "email": null }
+    {
+      "id": "0xb7AE5De3e843a26Ca764605f6Bec916701f88556",
+      "email": null
+    },
+    {
+      "id": "0x46F8351307482C162d7267F0fe08d5efd8Ba3BF1",
+      "email": null
+    }
   ],
-  "forums": [],
-  "threads": [],
-  "messages": []
+  "forums": [
+    {
+      "id": "0905e042-927e-4a30-a147-c30e9b5d2fd9",
+      "name": "The Forum",
+      "accountId": "0x46F8351307482C162d7267F0fe08d5efd8Ba3BF1",
+      "domain": "the-forum"
+    }
+  ],
+  "threads": [
+    {
+      "id": "64941a1f-00d0-4a7b-a863-aba0fd183d28",
+      "name": "This is a thread",
+      "description": "We do stuff and talk about it here",
+      "accountId": "0x46F8351307482C162d7267F0fe08d5efd8Ba3BF1",
+      "forumId": "0905e042-927e-4a30-a147-c30e9b5d2fd9"
+    }
+  ],
+  "messages": [
+    {
+      "id": "8c4afc59-2b22-458d-81fa-58ffd0b687e1",
+      "content": "This is a comment on a thread",
+      "accountId": "0x46F8351307482C162d7267F0fe08d5efd8Ba3BF1",
+      "forumId": "0905e042-927e-4a30-a147-c30e9b5d2fd9",
+      "threadId": "64941a1f-00d0-4a7b-a863-aba0fd183d28"
+    }
+  ]
 }

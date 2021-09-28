@@ -56,8 +56,8 @@ app
       result.forums.length === 0
         ? []
         : id
-        ? result.forums.filter((i: any) => (i.accountId = id))
-        : result.forums;
+          ? result.forums.filter((i: any) => (i.accountId = id))
+          : result.forums;
     return res.json(f(findAll));
   })
   .post('/forums', async (req, res) => {
@@ -147,7 +147,54 @@ app
     result.threads.push(data);
     fs.writeFileSync(DB_FILE, JSON.stringify(result));
     return res.json(f(data));
-  });
+  })
+  .get('/forums/:id/thread/:threadId', async (req, res) => {
+    const { id, threadId } = req.params;
+    const result = JSON.parse(fs.readFileSync(DB_FILE).toString());
+    if (!validate(id)) return res.status(404).json(f(e404));
+    const find = result.threads.find((i: any) => {
+      // maybe make use of the id (forum id)
+      return i?.id === threadId;
+    });
+    if (!find) return res.status(404).json(f(e404));
+    // note that this trims to 1 if 1+ entries
+    const threads =
+      result.threads.length === 0
+        ? []
+        : result.threads.filter((i: any) => i.forumId === id)[0];
+    return res.json(f(threads));
+  })
+  .get('/forums/:id/thread/:threadId/messages', async (req, res) => {
+    const { id, threadId } = req.params;
+    const result = JSON.parse(fs.readFileSync(DB_FILE).toString());
+    if (!validate(id)) return res.status(404).json(f(e404));
+    const find = result.messages.find((i: any) => {
+      return i?.threadId === threadId;
+    });
+    if (!find) return res.status(404).json(f(e404));
+    const messages =
+      result.messages.length === 0
+        ? []
+        : result.messages.filter((i: any) => i.forumId === id);
+    return res.json(f(messages));
+  })
+  .post('/forums/:id/thread/:threadId/messages', async (req, res) => {
+    const { id, threadId } = req.params;
+    const { content, accountId } = req.body;
+    if (!validate(id)) return res.status(404).json(f(e404));
+    const result = JSON.parse(fs.readFileSync(DB_FILE).toString());
+    const data = {
+      id: uuid(),
+      content,
+      accountId,
+      forumId: id,
+      threadId: threadId,
+    };
+
+    result.messages.push(data);
+    fs.writeFileSync(DB_FILE, JSON.stringify(result));
+    return res.json(f(data));
+  })
 
 // Listen
 // ========================================================

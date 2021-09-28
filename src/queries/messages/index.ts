@@ -4,32 +4,30 @@ import request from '../../utils/request';
 
 // Requests
 // ========================================================
-const Threads = {
-  find: (forumId: string, threadId?: string) => {
+const Messages = {
+  find: (forumId: string, threadId: string, messageId: string) => {
     return request({
-      url: `/forums/${forumId}/thread/${threadId}`,
+      url: `/forums/${forumId}/thread/${threadId}/message/${messageId}`,
       method: 'GET',
     });
   },
-  list: (forumId: string, address?: string) => {
+  list: (forumId: string, threadId: string) => {
     return request({
-      url: `/forums/${forumId}/threads${address ? `?id=${address}` : ''}`,
+      url: `/forums/${forumId}/thread/${threadId}/messages`,
       method: 'GET',
     });
   },
   create: (
-    name: string,
-    description: string,
+    content: string,
     forumId: string,
+    threadId: string,
     address: string,
   ) => {
     return request({
-      url: `/forums/${forumId}/threads`,
+      url: `/forums/${forumId}/thread/${threadId}/messages`,
       method: 'POST',
       data: {
-        name,
-        description,
-        forumId,
+        content,
         accountId: address,
       },
     });
@@ -41,4 +39,4 @@ const Threads = {
 
 // Exports
 // ========================================================
-export default Threads;
+export default Messages;

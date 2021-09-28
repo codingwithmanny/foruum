@@ -1,12 +1,13 @@
 // Imports
 // ========================================================
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { useUserWallet } from '../providers/userWallet';
 
 // Pages
 import LandingPage from '../pages/Landing';
 import ForuumsPage from '../pages/Foruums';
 import ForuumPage from '../pages/Foruum';
+import ThreadPage from '../pages/Thread';
 
 // All Routes
 // ========================================================
@@ -19,6 +20,7 @@ const Routes = () => {
     <Switch>
       <Route path="/" exact render={() => address ? <Redirect to="/foruums" /> : <LandingPage />} />
       <Route path="/foruums" exact render={() => !address ? <Redirect to="/" /> : <ForuumsPage />} />
+      <Route path="/foruums/:id/threads/:threadId" render={() => !address ? <Redirect to="/" /> : <ThreadPage />} />
       <Route path="/foruums/:id" exact render={() => !address ? <Redirect to="/" /> : <ForuumPage />} />
       <Route path="*" render={() => <p>404</p>} />
     </Switch>
